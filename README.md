@@ -38,23 +38,5 @@ perseus:site-packages jamesp$ zip -r9 ~/Projects/get_connect_ips/get_connect_ips
 perseus:get_connect_ips jamesp$ zip -g get_connect_ips.zip lambda_function.py 
   adding: lambda_function.py (deflated 57%)
   
-aws lambda update-function-code --function-name get_connect_ips --zip-file fileb://get_connect_ips.zip
-{
-    "TracingConfig": {
-        "Mode": "PassThrough"
-    }, 
-    "CodeSha256": "dxAYqQNP6+rlbX0n4GB2/aPRkHqBr0+TMcGijyWBQMk=", 
-    "FunctionName": "get_connect_ips", 
-    "CodeSize": 4558403, 
-    "RevisionId": "efb9ef79-83fe-4f73-84cc-9d843362eca0", 
-    "MemorySize": 128, 
-    "FunctionArn": "arn:aws:lambda:us-east-1:*:function:get_connect_ips", 
-    "Version": "$LATEST", 
-    "Role": "arn:aws:iam::*:role/lambda-s3-role", 
-    "Timeout": 3, 
-    "LastModified": "2018-12-24T20:21:39.002+0000", 
-    "Handler": "lambda_function.lambda_handler", 
-    "Runtime": "python3.7", 
-    "Description": ""
-}
+perseus:get_connect_ips jamesp$ aws lambda update-function-code --function-name get_connect_ips --zip-file fileb://get_connect_ips.zip
 ```
