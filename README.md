@@ -16,7 +16,38 @@ replace these with whatever you desire, however the lambda_path variable will al
 
 ## How to deploy this Lambda
 
-To deploy this lambda, you will need to create a zip file containing the requests module dependency. This can be done using  `virtualenv`. See AWS instructions for [AWS Lambda Deployment Package in Python](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html#python-package-venv) for instructions on how to create and deploy the module.
+I began by defining this in the AWS console using the Lambda > Function Desginer to define the SNS trigger and the Lambda execution policy.
+
+### Event Trigger
+AmazonIpSpaceChanged SNS Topic: `arn:aws:sns:us-east-1:806199016981:AmazonIpSpaceChanged`
+
+### Lambda Execution Policy
+lambda-s3-role
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:*"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::*"
+        }
+    ]
+}
+```
+
+To deploy this lambda, you will need to create a zip file containing the requests module dependency. This can be done using  `virtualenv`. See AWS instructions for [AWS Lambda Deployment Package in Python](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html#python-package-venv) for instructions on how to create and deploy the module. 
 
 ```
 perseus:get_connect_ips jamesp$ virtualenv v-env
