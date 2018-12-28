@@ -26,10 +26,9 @@ def lambda_handler(event, context):
         connect_ranges.append(ip)
 
     #write out a temp file until I figure out how to stream this directly to S3
-    f = open(lambda_path, 'w+')
-    for ip in connect_ranges:
-        f.write("%s\n" % ip)
-    f.close()
+    with open(lambda_path, 'w+') as f:
+        for ip in connect_ranges:
+            f.write("%s\n" % ip)
 
     s3 = boto3.resource("s3")
     s3.meta.client.upload_file(lambda_path, bucket_name, s3_path)
@@ -37,7 +36,7 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('success')
     }
-#delete these
+#I'm just here for debugging: $ python lambda_function.py 
 #event = "foo"
 #context = "bar"
-#lambda_handler(event, context) #I'm just here for debugging
+#lambda_handler(event, context)
